@@ -4,3 +4,4 @@
     <li><%= event.title %> - <%= event.date.strftime("%B %d %Y") %></li>
   <% end %>
 </ul>
+<%= link_to "Sign out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }%>
