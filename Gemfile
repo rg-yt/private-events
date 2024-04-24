@@ -67,3 +67,5 @@ group :test do
 end
 
 gem "rubocop", "~> 1.63"
+
+gem "devise", "~> 4.9"
