@@ -1,0 +1,8 @@
+<h1>My created events</h1>
+<%= link_to 'All Events', root_path %>
+<ul>
+  <% @events.each do |event| %>
+    <li><%= event.title %> - <%= event.date %></li>
+  <% end %>
+</ul>
+  
