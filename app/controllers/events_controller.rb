@@ -9,12 +9,16 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = current_user.events.build(event_params)
+    @event = current_user.created_events.build(event_params)
     if @event.save
       redirect_to root_path, notice: 'You\'ve created an event!'
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @event = Event.find(params[:id])
   end
 
   private
