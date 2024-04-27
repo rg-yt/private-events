@@ -1,4 +1,11 @@
-<%= @event.title %>
+<h1><%= @event.title %></h1>
+<h2>Attendees</h2>
+<ul>
+  <% @event.attendees.each do |user| %>
+    <li><%= user.email %></li>
+  <% end %>
+</ul>
+
 <p>
   <% if user_signed_in? %>
     <% if current_user.attended_events.exists?(@event.id) %>

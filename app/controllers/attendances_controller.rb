@@ -5,8 +5,7 @@ class AttendancesController < ApplicationController
     if current_user.attended_events << @event
       redirect_to event_path(@event.id), notice: "You've joined #{@event.title}"
     else
-      flash[:notice] = "Cannot find event #{params}"
-      redirect_to root_path
+      flash[:notice] = 'Cannot join event'
     end
   end
 
