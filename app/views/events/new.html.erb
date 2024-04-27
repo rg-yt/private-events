@@ -5,12 +5,17 @@
 <% end %>
 
 <%= form_with model: @event do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
 
-  <%= f.label :date %>
-  <%= f.date_field :date %>
+  <div>
+    <%= f.label :date %>
+    <%= f.date_field :date %>
+  </div>
 
-  <%= f.submit 'Submit' %>
+  <div><%= f.submit 'Submit' %></div>
 <% end %>
+<%= link_to 'Back to events', root_path %>
   
