@@ -5,11 +5,14 @@ class Event < ApplicationRecord
   has_many :attendances
   has_many :attendees, through: :attendances, source: :user
 
-  def self.past
-    where('date <= ?', DateTime.current.to_date)
-  end
+  scope :past, -> { where('date <= ?', DateTime.current.to_date) }
+  scope :future, -> { where('date > ?', DateTime.current.to_date) }
 
-  def self.future
-    where('date > ?', DateTime.current.to_date)
-  end
+  # def self.past
+  #   where('date <= ?', DateTime.current.to_date)
+  # end
+
+  # def self.future
+  #   where('date > ?', DateTime.current.to_date)
+  # end
 end
