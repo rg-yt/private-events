@@ -2,7 +2,7 @@ class Event < ApplicationRecord
   default_scope { order(date: :asc) }
   validates :date, presence: true
   belongs_to :creator, class_name: 'User'
-  has_many :attendances
+  has_many :attendances, dependent: :destroy
   has_many :attendees, through: :attendances, source: :user
 
   scope :past, -> { where('date <= ?', DateTime.current.to_date) }

@@ -14,6 +14,11 @@
       <%= link_to 'Join Event', attendances_path(event_id: @event.id), method: :post, data: { turbo_method: :post } %>
     <% end %>
   <% end %>
+
+  <% if current_user == @event.creator %>
+    <%= link_to 'Delete event',event_path(@event.id), method: :delete, data: { turbo_method: :delete } %>
+  <% end %>
+  
   
   <%= link_to 'Back to events', root_path %>
 </p>
