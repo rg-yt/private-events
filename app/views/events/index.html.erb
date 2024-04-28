@@ -1,17 +1,19 @@
-<h1>All Events</h1>
+<h1>Events</h1>
 <% if user_signed_in? %>
   <%= link_to 'My events', users_path %>
   <%= link_to 'Create event', new_event_path %>
 <% end %>
-
+<h2>Past Events</h2>
 <ul>
-  <% @events.each do |event| %>
+  <% @events.past.each do |event| %>
     <li><a href="<%= event_path(event.id) %>"><%= event.title %></a> - <%= event.date.strftime("%B %d %Y") %></li>
   <% end %>
 </ul>
-<% if user_signed_in? %>
-  <%= link_to "Sign out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }%>
-<% else %>
-  <%= link_to 'Sign in', new_user_session_path %>
-<% end %>
+<h2>Future Events</h2>
+<ul>
+  <% @events.future.each do |event| %>
+    <li><a href="<%= event_path(event.id) %>"><%= event.title %></a> - <%= event.date.strftime("%B %d %Y") %></li>
+  <% end %>
+</ul>
+
    

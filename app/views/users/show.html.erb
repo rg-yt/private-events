@@ -4,19 +4,19 @@
 <h2>Created Events</h2>
 <ul>
   <% @user.created_events.each do |event| %>
-    <li><%= event.title %> - <%= event.date %></li>
+    <li><%= event.title %></a> - <%= event.date.strftime("%B %d %Y") %></li>
   <% end %>
 </ul>
 <h2>Past events</h2>
 <ul>
-  <% @user.attended_events.where('date <= ?', DateTime.current.to_date).order(date: :asc).each do |event| %>
-    <li><%= event.title %> - <%= event.date %></li>
+  <% @user.attended_events.where('date <= ?', DateTime.current.to_date).each do |event| %>
+    <li><%= event.title %></a> - <%= event.date.strftime("%B %d %Y") %></li>
   <% end %>
 </ul>
 <h2>Future events</h2>
 <ul>
-  <% @user.attended_events.where('date > ?', DateTime.current.to_date).order(date: :asc).each do |event| %>
-    <li><%= event.title %> - <%= event.date %></li>
+  <% @user.attended_events.where('date > ?', DateTime.current.to_date).each do |event| %>
+    <li><%= event.title %></a> - <%= event.date.strftime("%B %d %Y") %></li>
   <% end %>
 </ul>
 
