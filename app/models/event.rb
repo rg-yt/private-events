@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   default_scope { order(date: :asc) }
-  validates :date, presence: true
+  validates :date, :title, presence: true
   belongs_to :creator, class_name: 'User'
   has_many :attendances, dependent: :destroy
   has_many :attendees, through: :attendances, source: :user
