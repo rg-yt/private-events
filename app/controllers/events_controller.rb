@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: %i[new create update destroy]
-  before_action :find_event, only: %i[edit show destroy]
+  before_action :set_event, only: %i[show edit update destroy]
+
   def index
     @events = Event.all
   end
@@ -20,6 +21,22 @@ class EventsController < ApplicationController
 
   def show; end
 
+  def edit
+    return if current_user == @event.creator
+
+    redirect_to root_path, notice: 'You do not have access to to edit this event'
+  end
+
+  def update
+    redirect_to root_path, notice: 'You cannot update this event' unless current_user == @event.creator
+
+    if @event.update(event_params)
+      redirect_to root_path, notice: 'You\'ve updated your event'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     if current_user == @event.creator
       current_user.created_events.destroy(@event)
@@ -29,25 +46,9 @@ class EventsController < ApplicationController
     end
   end
 
-  def edit
-    return if current_user == @event.creator
-
-    redirect_to root_path, notice: 'You are not the creator of the event you\'re trying to edit'
-  end
-
-  def update
-    event = Event.find(params[:id])
-    if current_user == event.creator
-      event.update(event_params)
-      redirect_to root_path, notice: 'You\'ve updated your event'
-    else
-      redirect_to root_path, notice: 'You cannot update this event'
-    end
-  end
-
   private
 
-  def find_event
+  def set_event
     @event = Event.find(params[:id])
   end
 
